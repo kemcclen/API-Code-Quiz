@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="./assets /style.css"/>
     <title>JavaScript Quiz</title>
 </head>
-<script src="./assets /script.js"> </script>
+
 <body>
+<!--Intro Page-->
     <header>
         <section class= "largeFont">JavaScript Quiz</div>
         <p>Answer the multiple choice questions within the designated time limiit. Five seconds will be deducted for incorrect answers. Good Luck.</p>
@@ -16,6 +17,7 @@
         </section>
     </header>
 
+<!--Answer Options-->
     <main>
         <section id="answersContainer">
             <div id="answerOptions"></div>
@@ -34,8 +36,30 @@
                 </div>
             </ul>
         </section>
-
-        
     </main>
+<!--Post-game-->
+
+<!--Score-->
+        <section id="gameEnd">
+            <h2>Thank you for playing!</h2>
+            <h2>Score: <span id="score"></span></h2>
+        </section>
+
+<!--Enter initials for scoreboard-->
+        <section id="initials">
+            <h2> Please enter your initials for the scoreboard:</h2>
+            <input type="text" id="enterInitials">
+            <input type="button" value="Submit" id="submitInitials"> 
+        </section>
+
+        <!--Scoreboard-->
+        <section id="highScoresContainer">
+            <h2>High Scores:</h2>
+            <div id="highScores">
+                <input type="button" value="Back to Home" id="backHome">
+            </div>
+        </section>
+
+        <script src="./assets /script.js"> </script>
 </body>
 </html>
