@@ -9,7 +9,6 @@ var submitInitials = document.getElementById("submitInitials");
 var highScoresContainer = document.getElementById("highScoresContainer");
 var highScores = document.getElementById("highScores");
 var backHome = document.getElementById("backHome");
-//var timerSeconds =setInterval(setStartTime, 1000);
 var answerOptions = document.getElementById("answerOptions");
 var answerA = document.getElementById("answerA");
 var answerB = document.getElementById("answerB");
@@ -140,4 +139,27 @@ function checkAnswer (e) {
     setQuestions ();
 
 }
+
+//to move to next question
+answerA.addEventListener ("click", checkAnswer);
+answerB.addEventListener ("click", checkAnswer);
+answerC.addEventListener ("click", checkAnswer);
+answerD.addEventListener ("click", checkAnswer);
+
+function setQuestions() {
+    
+    if (i === 5) {
+        quizDone();
+        document.getElementById ("score").innerHTML = `${score}`;
+
+    } else {
+        answerOptions.textContent = questionsArray[i].question;
+        document.getElementById ("answerA").textContent = questionsArray[i].choices[0];
+        document.getElementById ("answerB").textContent = questionsArray[i].choices[1];
+        document.getElementById ("answerC").textContent = questionsArray[i].choices[2];
+        document.getElementById ("answerD").textContent = questionsArray[i].choices[3];
+    
+      
+    }
+};
 
