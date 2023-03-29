@@ -57,6 +57,23 @@ var questionsArray = [
     }
 ];
 
+var timeCount = 60;
+var timerEl;
+//start button 
+startButton.addEventListener("click", function(event){
+    timerEl = setInterval(setStartTime, 1000);
+    setQuestions();
+    timeCountEl.textContent = timeCount;
+  
+})
+
+//COPY AND PASTED NEED TO MAKE IT WORK 
+function setStartTime() {
+timeCount--;
+timeCountEl.textContent = timeCount;
+}
+
+
 
 //Correct answers and responses
 function checkAnswer (e) {
