@@ -9,19 +9,17 @@
 </head>
 
 <body>
-    <!--Timer-->
-    <header>
-        <section id="timer">
-            <h2>Time Remaining: <span id="timeCount"></span></h2>
-        </section>
-    </header>
-<!--Title and Instructions-->
     <main>
-        <h2 id="title">JavaScript Quiz</h2>
         <section id="instructions">
+            <h2 id="title">JavaScript Quiz</h2>
             <p>Answer the multiple choice questions within the designated time limit. Five seconds will be deducted for incorrect answers. Good Luck.</p>
             <button class="startButton" id="startButton">Start</button>
         </section>
+         <!--Timer-->
+        <section id="timer">
+            <h2>Time Remaining: <span id="timeCount"></span></h2>
+        </section>
+        
 <!--Answer Options-->
         <section id="answersContainer">
 
@@ -39,7 +37,7 @@
                 <button id="answerD" class="button" type="button" value="3"></button>
             </div>
         </section>
-        <span id="alertMessage"></span>
+        <div id="alertMessage"></div>
     </main>
 
 <!--Post-game-->
@@ -57,7 +55,6 @@
             <button id="submitInitials">Submit</button>
            <!--<input type="button" value="Submit" > -->
         </section>
-
         <!--Scoreboard-->
         <section id="highScoresContainer">
             <h2>High Scores:</h2>

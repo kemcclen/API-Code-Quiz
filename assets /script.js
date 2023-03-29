@@ -7,7 +7,7 @@ var initials = document.getElementById("initials");
 var enterInitials = document.getElementById("enterInitials");
 var submitInitialsBtn = document.getElementById("submitInitials");
 var highScoresContainer = document.getElementById("highScoresContainer");
-//var highScores = document.getElementById("highScores");
+var viewHighScores = document.getElementById("highScores");
 var backHome = document.getElementById("backHome");
 var questionOptions = document.getElementById("questionOptions");
 var answerA = document.getElementById("answerA");
@@ -16,15 +16,13 @@ var answerC = document.getElementById("answerC");
 var answerD = document.getElementById("answerD");
 var score = document.getElementById("score");
 var questionsDivEl = document.getElementById("answersContainer");
-var highScores = [];
 var initialsInput=[];
 var score= 0;
 let i=0; // i is the Question Number
 var timeCount = 60;
 var timerEl;
 
-
-   //welcome page display
+   //----------------------------------------------------------welcome page display
     function welcome() {
     instructions.style.display = "block";
     document.getElementById("title").style.display = "block";
@@ -35,10 +33,10 @@ var timerEl;
     document.getElementById ("timer").style.display = "none";
 
     }
-//activate welcome page display
+//----------------------------------------------------------------activate welcome page display
     welcome();
 
-//Multiple choice questions
+//----------------------------------------------------------------Multiple choice questions
 var questionsArray = [
     {
         question: "What tag is used to wrap the JavasScript code in the HTML? ",
@@ -71,7 +69,7 @@ var questionsArray = [
     }
 ];
 
-//start game
+//--------------------------------------------------------------------------------start game
 startButton.addEventListener("click", function(event){
     timerEl = setInterval(setStartTime, 1000);
     setQuestions();
@@ -82,7 +80,7 @@ startButton.addEventListener("click", function(event){
     document.getElementById ("timer").style.display = "block";
 })
 
-//timer
+//----------------------------------------------------------------------------timer
 function setStartTime() {
 timeCount--;
 timeCountEl.textContent = timeCount;
@@ -93,7 +91,7 @@ if (timeCount <= 0) {
 }
 }
 
-//Correct answers and responses
+//------------------------------------------------Correct answers and responses
 function checkAnswer (e) {
 
     let userChoice = e.target.value;
@@ -158,19 +156,19 @@ function checkAnswer (e) {
     setQuestions();
 }
 
-//to move to next question
+//--------------------------------------------------------------to move to next question
 answerA.addEventListener ("click", checkAnswer);
 answerB.addEventListener ("click", checkAnswer);
 answerC.addEventListener ("click", checkAnswer);
 answerD.addEventListener ("click", checkAnswer);
 
-//finish at the 5th question
+
+//------------------------------------------------finish at the 5th question
 function setQuestions() {
     
     if (i === 5) {
         quizDone();
         document.getElementById ("score").innerHTML = `${score}`;
-        console.log(`${score}`);
 
     } else {
         questionOptions.textContent = questionsArray[i].question;
@@ -182,7 +180,7 @@ function setQuestions() {
  
 };
 
-//When quiz is done, show score, enter initials 
+//--------------------------------When quiz is done, show score, enter initials 
 function quizDone(){
     clearInterval(timerEl);
     questionsDivEl.style.display = "none";
@@ -191,27 +189,52 @@ function quizDone(){
     document.getElementById("gameEnd").style.display = "block";
     document.getElementById("alertMessage").style.display = "none";
     document.getElementById("initials").style.display = "block";
+    
     }
 
-    //function submitScore() {
-        submitInitialsBtn.addEventListener("click", function(event){
-            console.log(enterInitials.value);
-        document.getElementById("initials").style.display = "none";
-        document.getElementById("gameEnd").style.display = "none";
-       document.getElementById ("highScoresContainer").style.display = "block";
+    submitInitialsBtn.addEventListener("click", function(event){
+      viewScores();
     })
 
-//refresh when clear is clicked
+var scoreDisplay=[];
+    function viewScores(){
+        console.log(enterInitials.value);
+        document.getElementById("initials").style.display = "none";
+        document.getElementById("gameEnd").style.display = "none";
+        document.getElementById ("highScoresContainer").style.display = "block";
+        //saving initials in spring in Local Storage
+        window.localStorage.setItem ('userInit' , JSON.stringify (enterInitials.value));
+        let dataInit = window.localStorage.getItem('userInit');
+        console.log(dataInit);
+    
+        //----------------------SCRORE----------- 
+        document.getElementById ("score").innerHTML = `${score}`;
+        console.log(`${score}`);
+        window.localStorage.setItem ('finalScores', JSON.stringify (`${score}`));
+        let dataScores =window.localStorage.getItem('finalScores');
+        console.log(dataScores); 
+        
+
+       
+        for (let s=0; s<dataScores.length; s++){
+            highScores = dataInit + "" + dataScores;
+            
+        }
+
+        document.getElementById("highScores").innerHTML = highScores;
+    }
+
+//------------------------------------------------refresh when clear is clicked
 function refreshPage(){window.location.reload();
 } 
 
-//back home button
+//----------------------------------------------------------------back home button
 backHome.addEventListener("click", function(event){
 clear();
 welcome();
 
 })
-//reset game to play again
+//------------------------------------------------reset game to play again
 function clear() {
     timeCount=60;
     setStartTime();
@@ -220,8 +243,3 @@ function clear() {
 }
 
 
-
-
-// function highscores() {
-//     var storedScores = JSON.parse(localStorage.getItem `${score}`);
-// }
