@@ -5,11 +5,11 @@ var startButton = document.getElementById("startButton");
 var gameEnd = document.getElementById("gameEnd");
 var initials = document.getElementById("initials");
 var enterInitials = document.getElementById("enterInitials");
-var submitInitials = document.getElementById("submitInitials");
+var submitInitialsBtn = document.getElementById("submitInitials");
 var highScoresContainer = document.getElementById("highScoresContainer");
 var highScores = document.getElementById("highScores");
 var backHome = document.getElementById("backHome");
-var answerOptions = document.getElementById("answerOptions");
+var questionOptions = document.getElementById("questionOptions");
 var answerA = document.getElementById("answerA");
 var answerB = document.getElementById("answerB");
 var answerC = document.getElementById("answerC");
@@ -22,6 +22,17 @@ var scoreBoard = [];
 var score= 0;
 let i=0; // i is the QUestion Number
 
+
+    
+   
+    //home page
+    instructions.style.display = "block";
+    document.getElementById("title").style.display = "block";
+    questionsDivEl.style.display = "none";
+    document.getElementById ("gameEnd").style.display = "none";
+    document.getElementById ("highScoresContainer").style.display = "none";
+    document.getElementById ("initials").style.display = "none";
+    document.getElementById ("timer").style.display = "none";
 
 //Multiple choice questions
 var questionsArray = [
@@ -60,10 +71,17 @@ var questionsArray = [
 //timer
 var timeCount = 60;
 var timerEl;
+
+
 startButton.addEventListener("click", function(event){
     timerEl = setInterval(setStartTime, 1000);
     setQuestions();
     timeCountEl.textContent = timeCount;
+    instructions.style.display = "none";
+    questionsDivEl.style.display = "block";
+    document.getElementById("title").style.display = "none";
+    document.getElementById ("timer").style.display = "block";
+
   
 })
 
@@ -154,7 +172,7 @@ function setQuestions() {
         document.getElementById ("score").innerHTML = `${score}`;
 
     } else {
-        answerOptions.textContent = questionsArray[i].question;
+        questionOptions.textContent = questionsArray[i].question;
         document.getElementById ("answerA").textContent = questionsArray[i].choices[0];
         document.getElementById ("answerB").textContent = questionsArray[i].choices[1];
         document.getElementById ("answerC").textContent = questionsArray[i].choices[2];
@@ -168,4 +186,18 @@ function setQuestions() {
 function quizDone(){
     clearInterval(timerEl);
     questionsDivEl.style.display = "none";
+    document.getElementById("timer").style.display = "none";
+    document.getElementById("highScoresContainer").style.display = "none";
+    document.getElementById("gameEnd").style.display = "block";
+    document.getElementById("alertMessage").style.display = "none";
+    document.getElementById("initials").style.display = "block";
+   
     }
+
+    submitInitialsBtn.addEventListener("click", function(event){
+        document.getElementById("initials").style.display = "none";
+        document.getElementById("gameEnd").style.display = "none";
+        document.getElementById ("highScoresContainer").style.display = "block";
+    
+      
+    })

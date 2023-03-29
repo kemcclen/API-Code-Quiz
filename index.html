@@ -14,18 +14,18 @@
         <section id="timer">
             <h2>Time Remaining: <span id="timeCount"></span></h2>
         </section>
-
+    </header>
 <!--Title and Instructions-->
     <main>
-        <h2>JavaScript Quiz</h2>
+        <h2 id="title">JavaScript Quiz</h2>
         <section id="instructions">
-            <p>Answer the multiple choice questions within the designated time limiit. Five seconds will be deducted for incorrect answers. Good Luck.</p>
+            <p>Answer the multiple choice questions within the designated time limit. Five seconds will be deducted for incorrect answers. Good Luck.</p>
             <button class="startButton" id="startButton">Start</button>
         </section>
 <!--Answer Options-->
         <section id="answersContainer">
 
-            <div id="answerOptions"></div>
+            <div id="questionOptions"></div>
             <div>
                 <button id="answerA" class="button" type="button" value="0"></button>
             </div>
@@ -54,14 +54,18 @@
         <section id="initials">
             <h2> Please enter your initials for the scoreboard:</h2>
             <input type="text" id="enterInitials">
-            <input type="button" value="Submit" id="submitInitials"> 
+            <button id="submitInitials">Submit</button>
+           <!--<input type="button" value="Submit" > -->
         </section>
 
         <!--Scoreboard-->
         <section id="highScoresContainer">
             <h2>High Scores:</h2>
             <div id="highScores">
-                <input type="button" value="Back to Home" id="backHome">
+                <button id="backHome">Back Home</button>
+                <button id="clearHighScores">Clear Highscores</button>
+                <!--<input type="button" value="Back to Home" id="backHome">
+                <input type="button" value="Clear Highscores" id="clearHighScores">-->
             </div>
         </section>
         <script src="./assets /script.js"> </script>
