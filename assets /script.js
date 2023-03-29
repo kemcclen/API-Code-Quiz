@@ -56,9 +56,10 @@ var questionsArray = [
     }
 ];
 
+
+//timer
 var timeCount = 60;
 var timerEl;
-//start button 
 startButton.addEventListener("click", function(event){
     timerEl = setInterval(setStartTime, 1000);
     setQuestions();
@@ -66,7 +67,7 @@ startButton.addEventListener("click", function(event){
   
 })
 
-//COPY AND PASTED NEED TO MAKE IT WORK 
+//make time visible
 function setStartTime() {
 timeCount--;
 timeCountEl.textContent = timeCount;
@@ -163,3 +164,8 @@ function setQuestions() {
     }
 };
 
+//end game
+function quizDone(){
+    clearInterval(timerEl);
+    questionsDivEl.style.display = "none";
+    }
