@@ -7,7 +7,7 @@ var initials = document.getElementById("initials");
 var enterInitials = document.getElementById("enterInitials");
 var submitInitialsBtn = document.getElementById("submitInitials");
 var highScoresContainer = document.getElementById("highScoresContainer");
-var highScores = document.getElementById("highScores");
+//var highScores = document.getElementById("highScores");
 var backHome = document.getElementById("backHome");
 var questionOptions = document.getElementById("questionOptions");
 var answerA = document.getElementById("answerA");
@@ -16,16 +16,16 @@ var answerC = document.getElementById("answerC");
 var answerD = document.getElementById("answerD");
 var score = document.getElementById("score");
 var questionsDivEl = document.getElementById("answersContainer");
-var userInput = "";
-var rightAnswer= "";
-var scoreBoard = [];
+var highScores = [];
+var initialsInput=[];
 var score= 0;
-let i=0; // i is the QUestion Number
+let i=0; // i is the Question Number
+var timeCount = 60;
+var timerEl;
 
 
-    
-   
-    //home page
+   //welcome page display
+    function welcome() {
     instructions.style.display = "block";
     document.getElementById("title").style.display = "block";
     questionsDivEl.style.display = "none";
@@ -33,6 +33,10 @@ let i=0; // i is the QUestion Number
     document.getElementById ("highScoresContainer").style.display = "none";
     document.getElementById ("initials").style.display = "none";
     document.getElementById ("timer").style.display = "none";
+
+    }
+//activate welcome page display
+    welcome();
 
 //Multiple choice questions
 var questionsArray = [
@@ -67,12 +71,7 @@ var questionsArray = [
     }
 ];
 
-
-//timer
-var timeCount = 60;
-var timerEl;
-
-
+//start game
 startButton.addEventListener("click", function(event){
     timerEl = setInterval(setStartTime, 1000);
     setQuestions();
@@ -81,17 +80,18 @@ startButton.addEventListener("click", function(event){
     questionsDivEl.style.display = "block";
     document.getElementById("title").style.display = "none";
     document.getElementById ("timer").style.display = "block";
-
-  
 })
 
-//make time visible
+//timer
 function setStartTime() {
 timeCount--;
 timeCountEl.textContent = timeCount;
+if (timeCount <= 0) {
+    clearInterval (timeCount);
+    quizDone();
+    timeCount =0;
 }
-
-
+}
 
 //Correct answers and responses
 function checkAnswer (e) {
@@ -155,8 +155,7 @@ function checkAnswer (e) {
         }
     }
     i++;
-    setQuestions ();
-
+    setQuestions();
 }
 
 //to move to next question
@@ -165,11 +164,13 @@ answerB.addEventListener ("click", checkAnswer);
 answerC.addEventListener ("click", checkAnswer);
 answerD.addEventListener ("click", checkAnswer);
 
+//finish at the 5th question
 function setQuestions() {
     
     if (i === 5) {
         quizDone();
         document.getElementById ("score").innerHTML = `${score}`;
+        console.log(`${score}`);
 
     } else {
         questionOptions.textContent = questionsArray[i].question;
@@ -177,12 +178,11 @@ function setQuestions() {
         document.getElementById ("answerB").textContent = questionsArray[i].choices[1];
         document.getElementById ("answerC").textContent = questionsArray[i].choices[2];
         document.getElementById ("answerD").textContent = questionsArray[i].choices[3];
-    
-      
-    }
+   }
+ 
 };
 
-//end game
+//When quiz is done, show score, enter initials 
 function quizDone(){
     clearInterval(timerEl);
     questionsDivEl.style.display = "none";
@@ -191,13 +191,37 @@ function quizDone(){
     document.getElementById("gameEnd").style.display = "block";
     document.getElementById("alertMessage").style.display = "none";
     document.getElementById("initials").style.display = "block";
-   
     }
 
-    submitInitialsBtn.addEventListener("click", function(event){
+    //function submitScore() {
+        submitInitialsBtn.addEventListener("click", function(event){
+            console.log(enterInitials.value);
         document.getElementById("initials").style.display = "none";
         document.getElementById("gameEnd").style.display = "none";
-        document.getElementById ("highScoresContainer").style.display = "block";
-    
-      
+       document.getElementById ("highScoresContainer").style.display = "block";
     })
+
+//refresh when clear is clicked
+function refreshPage(){window.location.reload();
+} 
+
+//back home button
+backHome.addEventListener("click", function(event){
+clear();
+welcome();
+
+})
+//reset game to play again
+function clear() {
+    timeCount=60;
+    setStartTime();
+    score=0;
+    i=0
+}
+
+
+
+
+// function highscores() {
+//     var storedScores = JSON.parse(localStorage.getItem `${score}`);
+// }
