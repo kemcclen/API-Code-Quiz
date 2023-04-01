@@ -35,10 +35,6 @@ nav {
   background: grey;
 }
 
-nav ul li {
-  list-style: none;
-  cursor: pointer;
-}
 
 #gameEnd,
 #questionOptions,

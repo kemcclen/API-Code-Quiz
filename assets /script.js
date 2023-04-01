@@ -1,5 +1,4 @@
 //Global variables 
-var timer = document.getElementById("timer");
 var timeCountEl = document.getElementById("timeCount");
 var startButton = document.getElementById("startButton");
 var gameEnd = document.getElementById("gameEnd");
@@ -21,6 +20,7 @@ var score= 0;
 let i=0; // i is the Question Number
 var timeCount = 60;
 var timerEl;
+var scoreDisplay=[];
 
    //----------------------------------------------------------welcome page display
     function welcome() {
@@ -197,14 +197,15 @@ function quizDone(){
  
 
 //--------------------------------------------show score
- var scoreDisplay=[];
 
     function viewScores(){
         console.log(enterInitials.value);
         document.getElementById("initials").style.display = "none";
         document.getElementById("gameEnd").style.display = "none";
-        document.getElementById ("highScoresContainer").style.display = "block";document.getElementById ("alertMessage").style.display ="none";
-        //saving initials in spring in Local Storage
+        document.getElementById ("highScoresContainer").style.display = "block";
+        document.getElementById ("alertMessage").style.display ="none";
+        
+        //saving initials in string in Local Storage
         window.localStorage.setItem ('userInit' , JSON.stringify (enterInitials.value));
         let dataInit = window.localStorage.getItem('userInit');
         console.log(dataInit);
@@ -217,14 +218,13 @@ function quizDone(){
         //----------------------SCRORE----------- 
         document.getElementById ("score").innerHTML = `${score}`;
         console.log(`${score}`);
+
+        //saving score in string in local storage
         window.localStorage.setItem ('finalScores', JSON.stringify (`${score}`));
         let dataScores =window.localStorage.getItem('finalScores');
         console.log(dataScores); 
         dataScores = JSON.parse(dataScores)
-        
-
         console.log (scoreDisplay);
-        
 
         var scoreString = "";
 
@@ -237,32 +237,14 @@ function quizDone(){
             scoreString += "No scores yet!";
         }
         console.log ("scoreString", scoreString);
-        
-
 
         document.getElementById("highScores").innerHTML = scoreString;
     }
 
     submitInitialsBtn.addEventListener("click", function(event){
         viewScores();
-        
       })
       
-      var viewScoresPage = document.getElementById("viewScoresPage");
-
-      viewScoresPage.addEventListener("click", function (event){
-        viewScores();
-        console.log(enterInitials.value);
-        document.getElementById("initials").style.display = "none";
-        document.getElementById("gameEnd").style.display = "none";
-        document.getElementById ("highScoresContainer").style.display = "block";
-        instructions.style.display = "none";
-        document.getElementById("title").style.display = "none";
-        questionsDivEl.style.display = "none";
-        document.getElementById ("timer").style.display = "none";
-        document.getElementById ("alertMessage").style.display ="none";
-      })
-
 //------------------------------------------------refresh when clear is clicked
 function refreshPage(){window.location.reload();
 } 
@@ -271,7 +253,6 @@ function refreshPage(){window.location.reload();
 backHome.addEventListener("click", function(event){
 clear();
 welcome();
-
 })
 //------------------------------------------------reset game to play again
 function clear() {
