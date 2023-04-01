@@ -31,6 +31,7 @@ var timerEl;
     document.getElementById ("highScoresContainer").style.display = "none";
     document.getElementById ("initials").style.display = "none";
     document.getElementById ("timer").style.display = "none";
+    document.getElementById ("alertMessage").style.display ="none";
 
     }
 //----------------------------------------------------------------activate welcome page display
@@ -78,6 +79,7 @@ startButton.addEventListener("click", function(event){
     questionsDivEl.style.display = "block";
     document.getElementById("title").style.display = "none";
     document.getElementById ("timer").style.display = "block";
+    document.getElementById ("alertMessage").style.display ="block";
 })
 
 //----------------------------------------------------------------------------timer
@@ -180,7 +182,7 @@ function setQuestions() {
  
 };
 
-//--------------------------------When quiz is done, show score, enter initials 
+//--------------------------------------------When questions are done  
 function quizDone(){
     clearInterval(timerEl);
     questionsDivEl.style.display = "none";
@@ -192,37 +194,74 @@ function quizDone(){
     
     }
 
-    submitInitialsBtn.addEventListener("click", function(event){
-      viewScores();
-    })
+ 
 
-var scoreDisplay=[];
+//--------------------------------------------show score
+ var scoreDisplay=[];
+
     function viewScores(){
         console.log(enterInitials.value);
         document.getElementById("initials").style.display = "none";
         document.getElementById("gameEnd").style.display = "none";
-        document.getElementById ("highScoresContainer").style.display = "block";
+        document.getElementById ("highScoresContainer").style.display = "block";document.getElementById ("alertMessage").style.display ="none";
         //saving initials in spring in Local Storage
         window.localStorage.setItem ('userInit' , JSON.stringify (enterInitials.value));
         let dataInit = window.localStorage.getItem('userInit');
         console.log(dataInit);
-    
+        dataInit = JSON.parse(dataInit);
+
+        if (enterInitials.value.length > 0) {
+            scoreDisplay.push ([enterInitials.value, score]);
+        }
+            
         //----------------------SCRORE----------- 
         document.getElementById ("score").innerHTML = `${score}`;
         console.log(`${score}`);
         window.localStorage.setItem ('finalScores', JSON.stringify (`${score}`));
         let dataScores =window.localStorage.getItem('finalScores');
         console.log(dataScores); 
+        dataScores = JSON.parse(dataScores)
         
 
-       
-        for (let s=0; s<dataScores.length; s++){
-            highScores = dataInit + "" + dataScores;
-            
-        }
+        console.log (scoreDisplay);
+        
 
-        document.getElementById("highScores").innerHTML = highScores;
+        var scoreString = "";
+
+        if (scoreDisplay.length > 0) {
+
+            for (let z = 0; z < scoreDisplay.length; z++) {
+                scoreString += `${scoreDisplay[z][0]}: ${scoreDisplay[z][1]}<br>`;
+            }
+        } else {
+            scoreString += "No scores yet!";
+        }
+        console.log ("scoreString", scoreString);
+        
+
+
+        document.getElementById("highScores").innerHTML = scoreString;
     }
+
+    submitInitialsBtn.addEventListener("click", function(event){
+        viewScores();
+        
+      })
+      
+      var viewScoresPage = document.getElementById("viewScoresPage");
+
+      viewScoresPage.addEventListener("click", function (event){
+        viewScores();
+        console.log(enterInitials.value);
+        document.getElementById("initials").style.display = "none";
+        document.getElementById("gameEnd").style.display = "none";
+        document.getElementById ("highScoresContainer").style.display = "block";
+        instructions.style.display = "none";
+        document.getElementById("title").style.display = "none";
+        questionsDivEl.style.display = "none";
+        document.getElementById ("timer").style.display = "none";
+        document.getElementById ("alertMessage").style.display ="none";
+      })
 
 //------------------------------------------------refresh when clear is clicked
 function refreshPage(){window.location.reload();
@@ -239,7 +278,7 @@ function clear() {
     timeCount=60;
     setStartTime();
     score=0;
-    i=0
+    i=0;
 }
 
 
