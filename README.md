@@ -6,6 +6,7 @@ This application is a timed coding quiz with multiple-choice questions. It runs 
 The user has 60 seconds to answer 5 multiple choice questions on JavaScript fundamentals. If a question is answered incorrectly, 5 seconds id deducted from the timer. 
 
 The deplayed application can be acessed here: https://kemcclen.github.io/API-Code-Quiz/
+
 The repository can be acessed here: https://github.com/kemcclen/API-Code-Quiz
 
 ## Credits
@@ -16,4 +17,8 @@ MIT License
 
 ## Assets
 The following video shows the application's appearance and functionality:
+
+
+
+https://user-images.githubusercontent.com/123762040/229308800-cd91c70f-69d0-480d-8cd8-792322433b0c.mov
 
